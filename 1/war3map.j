@@ -1644,6 +1644,9 @@ integer array Hl
 integer array jl
 integer array Jl
 integer array kl
+integer array fzzsl
+timer array fzzs8lo
+unit array fzzs8io
 unit array Kl
 integer array ll
 integer Ll=0
@@ -9670,8 +9673,6 @@ boolexpr o680i=null
 hashtable o68_i=InitHashtable()
 endglobals
 native UnitAlive takes unit u returns boolean
-native DzAPI_Map_HasMallItem takes player whichPlayer,string key returns boolean
-// native DzAPI_Map_GetPlayerUserName takes player whichPlayer returns string
 function DzAPI_Map_GetPlayerUserName takes player whichPlayer returns string
 return "Heavy丶rain#5346"
 endfunction
@@ -135758,6 +135759,46 @@ call TriggerRegisterUnitEvent(qi_8[o69qi],(yx[(o69qi)]),EVENT_UNIT_ACQUIRED_TARG
 call TriggerAddCondition(qi_8[o69qi],Filter(function qO6ii))
 endif
 endfunction
+function fzzsIi_i takes nothing returns nothing
+local integer o69qi=(LoadInteger(Nv,(Lc),((GetHandleId((GetExpiredTimer()))))))
+local real pii9i
+local real pi1ii
+
+set pii9i = GetUnitX(fzzs8io[o69qi]) + 96.
+set pi1ii = GetUnitY(fzzs8io[o69qi]) + 96.
+
+if UnitAlive((yx[(o69qi)]))then
+    if not IsUnitInRange((yx[(o69qi)]), fzzs8io[o69qi], 1500.) then
+
+        call SetUnitX((yx[(o69qi)]), pii9i)
+        call SetUnitY((yx[(o69qi)]), pi1ii)
+        
+        call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl", (yx[(o69qi)]), "origin"))
+    endif
+else
+    call ReviveHero((yx[(o69qi)]), pii9i, pi1ii, false)
+endif
+endfunction 
+function cfzzs98 takes unit o6u8i returns integer
+local real o961i = GetRandomReal(0, ao)
+
+local integer o69qi = (GetUnitUserData((CreateUnit(GetOwningPlayer(o6u8i), 'H0AI', GetUnitX(o6u8i)+20.*Cos(o961i), GetUnitY(o6u8i)+20.*Sin(o961i), .0))))
+
+set fzzs8io[o69qi] = o6u8i
+set fzzs8lo[o69qi] = Oiq9i(o69qi)
+
+call O_O1i((o69qi), false)
+call o9Oui((o69qi))
+call O_OOi((o69qi), true)
+
+call SetHeroLevel((yx[(o69qi)]), 100, false)
+call SuspendHeroXP((yx[(o69qi)]), true)
+call OlI9i((yx[(o69qi)]),'A00F')
+
+call TimerStart(fzzs8lo[o69qi], .03125, true, function fzzsIi_i)
+
+return o69qi
+endfunction
 function qO6Ii takes nothing returns nothing
 set TK[zK[OO8Oi('A05Y')]]=true
 set sK[YK[OO8Oi('A05Y')]]=true
@@ -135908,6 +135949,7 @@ call ClearSelection()
 call SelectUnit((yx[(jl[((o69qi))])]),true)
 endif
 call O6l9i(((((o69qi)))),GetUnitX((yx[(jl[((o69qi))])])),GetUnitY((yx[(jl[((o69qi))])])),0)
+set fzzsl[((o69qi))] = cfzzs98(yx[(jl[((o69qi))])])
 if q1u8[o69qi]then
 call SetPlayerState((P[((((o69qi))))]),PLAYER_STATE_RESOURCE_GOLD,(500))
 call UnitAddItem((yx[(jl[((o69qi))])]),O1oui('I007',GetUnitX((yx[(jl[((o69qi))])])),GetUnitY((yx[(jl[((o69qi))])]))))
@@ -135955,6 +135997,7 @@ call Oui8i(kl[((o69qi))])
 call Oui1i(Jl[((o69qi))])
 call Oui8i(Jl[((o69qi))])
 set Jl[((o69qi))]=0
+set fzzsl[((o69qi))]=0
 call RemoveUnit(Kl[((o69qi))])
 set Kl[((o69qi))]=null
 call Op6li((yx[(jl[((o69qi))])]))
