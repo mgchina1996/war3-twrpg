@@ -1,0 +1,48 @@
+`O06pi` 是一个 **事件注册函数**，用于给指定单位注册一个 **“定期执行”或“特定周期”的回调事件**。
+
+```jass
+function O06pi takes integer o69qi, code c, integer O1iui returns nothing
+    // 参数说明：
+    // o69qi: 目标单位的索引 ID
+    // c:     要执行的回调函数 (code)
+    // O1iui: 周期/间隔时间 (以某种 tick 或秒为单位) 或者 优先级
+
+    // 1. 安全检查
+    // 如果 ID 为 0 或者该 ID 对应的单位不存在，直接返回。
+    if o69qi == 0 or (yx[(o69qi)]) == null then
+        return
+    endif
+
+    // 2. 初始化事件列表
+    // BQ 数组存储每个单位的“周期性事件管理器”。
+    // 如果该单位还没有这个管理器，就创建一个 (O1i8i)。
+    if BQ[o69qi] == 0 then
+        set BQ[o69qi] = O1i8i()
+    endif
+
+    // 3. 注册回调
+    if O1iui == 0 then
+        // 普通添加 (可能是默认周期)
+        call O1ioi(BQ[o69qi], c)
+    else
+        // 带参数添加 (指定周期 O1iui)
+        // O1i6i 会将代码 c 和参数 O1iui 一起存入列表。
+        call O1i6i(BQ[o69qi], c, O1iui)
+    endif
+    
+endfunction
+```
+
+### 在 `pIi6i` 中的应用 (Line 91385)
+```jass
+call O06pi((o69qi), function pIipi, 20)
+```
+*   **含义**: 给宠物单位 (`o69qi`) 注册一个周期性任务。
+*   **任务内容**: 执行 `pIipi` 函数。
+*   **周期**: `20`。
+    *   这个 `20` 可能是秒数（每 20 秒执行一次），也可能是 Tick 数。
+    *   结合通常的 RPG 逻辑，这很可能是一个 **低频状态检查**（如每 20 秒自动回血回蓝，或者检查宠物是否还在主人附近，或者同步某些长效 buff）。
+
+### 总结
+`O06pi` = **RegisterPeriodicEvent** (注册周期性事件)。
+它告诉系统：“每隔 `O1iui` 这么久，就针对单位 `o69qi` 运行一次代码 `c`。”

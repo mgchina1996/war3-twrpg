@@ -95113,7 +95113,7 @@ function po8pi takes unit u returns nothing
 local integer o69qi=(GetUnitUserData((u)))
 if po8_i(o69qi)then
 set O8qO[o69qi]=O0qli((o69qi),function po8ui,0)
-set eW[O89O[o69qi]]=(MQ[(jl[((GetPlayerId(GetOwningPlayer((yx[((((GetUnitUserData((((yx[(o69qi)]))))))))])))))])]*500.)
+set eW[O89O[o69qi]]=(MQ[(jl[((GetPlayerId(GetOwningPlayer((yx   [((((GetUnitUserData((((yx[(o69qi)]))))))))])))))])]*500.)
 set O86O[o69qi]=0
 endif
 call OlI9i((yx[(o69qi)]),'A075')
@@ -135794,6 +135794,13 @@ call O_OOi((o69qi), true)
 call SetHeroLevel((yx[(o69qi)]), 100, false)
 call SuspendHeroXP((yx[(o69qi)]), true)
 call OlI9i((yx[(o69qi)]),'A00F')
+
+call OlI9i((yx[(o69qi)]),'A13S')
+call OlI9i((yx[(o69qi)]),'A13V')
+call OlI9i((yx[(o69qi)]),'A14G')
+call OlI9i((yx[(o69qi)]),'A14P')
+call OlI9i((yx[(o69qi)]),'A15B')
+call OlI9i((yx[(o69qi)]),'A16D')
 
 call TimerStart(fzzs8lo[o69qi], .03125, true, function fzzsIi_i)
 
