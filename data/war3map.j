@@ -185390,10 +185390,626 @@ if not p1pl then
 call I9lo((4),("ReceiveItem_"),("ReceiveItem__System"),I2S((0)),("apply"),"",("op limit reached"))
 endif
 endfunction
+// 仅发放服装文档中当前英雄可用的服装。
+function fzzsGrantCostumesByHero takes integer fzzsPid returns nothing
+call l6opi(fzzsPid,'H04Q','I0L6')
+call l6opi(fzzsPid,'H002','I0L6')
+call l6opi(fzzsPid,'H00K','I0L6')
+call l6opi(fzzsPid,'H05B','I0L6')
+call l6opi(fzzsPid,'H00H','I0L6')
+call l6opi(fzzsPid,'H02M','I0L6')
+call l6opi(fzzsPid,'H00Z','I0L6')
+call l6opi(fzzsPid,'H015','I0L6')
+call l6opi(fzzsPid,'H00J','I0L6')
+call l6opi(fzzsPid,'H005','I0L6')
+call l6opi(fzzsPid,'H003','I0L6')
+call l6opi(fzzsPid,'H01V','I0L6')
+call l6opi(fzzsPid,'Hblm','I0L6')
+call l6opi(fzzsPid,'H000','I0L6')
+call l6opi(fzzsPid,'H009','I0L6')
+call l6opi(fzzsPid,'H01N','I0L6')
+call l6opi(fzzsPid,'H066','I0L6')
+call l6opi(fzzsPid,'H01I','I0L6')
+call l6opi(fzzsPid,'H076','I0L6')
+call l6opi(fzzsPid,'H00E','I0L6')
+call l6opi(fzzsPid,'H008','I0L6')
+call l6opi(fzzsPid,'H006','I0L6')
+call l6opi(fzzsPid,'H001','I0L6')
+call l6opi(fzzsPid,'H05T','I0L6')
+call l6opi(fzzsPid,'H01H','I0L6')
+call l6opi(fzzsPid,'H021','I0L6')
+call l6opi(fzzsPid,'H01V','I0GC')
+call l6opi(fzzsPid,'H006','I0GC')
+call l6opi(fzzsPid,'H007','I0GC')
+call l6opi(fzzsPid,'H008','I0GC')
+call l6opi(fzzsPid,'H04Q','I0GC')
+call l6opi(fzzsPid,'Hblm','I0GC')
+call l6opi(fzzsPid,'H05T','I0GC')
+call l6opi(fzzsPid,'Hmkg','I0GC')
+call l6opi(fzzsPid,'H04S','I0GC')
+call l6opi(fzzsPid,'H02M','I0GC')
+call l6opi(fzzsPid,'H076','I0GI')
+call l6opi(fzzsPid,'H00E','I0GI')
+call l6opi(fzzsPid,'H003','I0GI')
+call l6opi(fzzsPid,'H00H','I0GI')
+call l6opi(fzzsPid,'H01H','I0GI')
+call l6opi(fzzsPid,'H000','I0FT')
+call l6opi(fzzsPid,'H01V','I0FT')
+call l6opi(fzzsPid,'H00Z','I0FT')
+call l6opi(fzzsPid,'H015','I0FT')
+call l6opi(fzzsPid,'H05B','I0FT')
+call l6opi(fzzsPid,'H00K','I0FT')
+call l6opi(fzzsPid,'H000','I0GF')
+call l6opi(fzzsPid,'H00H','I0GF')
+call l6opi(fzzsPid,'H003','I0GF')
+call l6opi(fzzsPid,'Hmkg','I0GF')
+call l6opi(fzzsPid,'H01H','I0GF')
+call l6opi(fzzsPid,'H004','I0GF')
+call l6opi(fzzsPid,'H04R','I0GF')
+call l6opi(fzzsPid,'H066','I0GF')
+call l6opi(fzzsPid,'H01I','I0GF')
+call l6opi(fzzsPid,'H005','I0GF')
+call l6opi(fzzsPid,'H09M','I0GF')
+call l6opi(fzzsPid,'H08G','I0GF')
+call l6opi(fzzsPid,'H002','I0GF')
+call l6opi(fzzsPid,'H01N','I0GF')
+call l6opi(fzzsPid,'H001','I0ID')
+call l6opi(fzzsPid,'H04S','I0ID')
+call l6opi(fzzsPid,'H065','I0ID')
+call l6opi(fzzsPid,'H021','I0ID')
+call l6opi(fzzsPid,'H00J','I0ID')
+call l6opi(fzzsPid,'H01N','I0ID')
+call l6opi(fzzsPid,'H009','I0ID')
+call l6opi(fzzsPid,'Hmkg','I0H3')
+call l6opi(fzzsPid,'Hblm','I0H3')
+call l6opi(fzzsPid,'H00H','I0H3')
+call l6opi(fzzsPid,'H000','I0H3')
+call l6opi(fzzsPid,'H003','I0H3')
+call l6opi(fzzsPid,'H01V','I0H3')
+call l6opi(fzzsPid,'H04Q','I0H3')
+call l6opi(fzzsPid,'H076','I0H3')
+call l6opi(fzzsPid,'H09M','I0H3')
+call l6opi(fzzsPid,'H09N','I0H3')
+call l6opi(fzzsPid,'H019','I0H3')
+call l6opi(fzzsPid,'H04S','I0H3')
+call l6opi(fzzsPid,'H00K','I0H3')
+call l6opi(fzzsPid,'H05B','I0H3')
+call l6opi(fzzsPid,'H01H','I0H3')
+call l6opi(fzzsPid,'H04R','I0H3')
+call l6opi(fzzsPid,'H00E','I0H3')
+call l6opi(fzzsPid,'H001','I0H3')
+call l6opi(fzzsPid,'H05T','I0H3')
+call l6opi(fzzsPid,'H00Z','I0H3')
+call l6opi(fzzsPid,'H015','I0H3')
+call l6opi(fzzsPid,'H004','I0H3')
+call l6opi(fzzsPid,'H07X','I0H3')
+call l6opi(fzzsPid,'H065','I0H3')
+call l6opi(fzzsPid,'H00J','I0H3')
+call l6opi(fzzsPid,'H066','I0H3')
+call l6opi(fzzsPid,'H005','I0H3')
+call l6opi(fzzsPid,'H002','I0H3')
+call l6opi(fzzsPid,'H021','I0H3')
+call l6opi(fzzsPid,'H01N','I0H3')
+call l6opi(fzzsPid,'H006','I0H3')
+call l6opi(fzzsPid,'H009','I0H3')
+call l6opi(fzzsPid,'H007','I0H3')
+call l6opi(fzzsPid,'H008','I0H3')
+call l6opi(fzzsPid,'H02M','I0H3')
+call l6opi(fzzsPid,'H01I','I0H3')
+call l6opi(fzzsPid,'H08G','I0H3')
+call l6opi(fzzsPid,'Hmkg','I0HF')
+call l6opi(fzzsPid,'Hblm','I0HF')
+call l6opi(fzzsPid,'H00H','I0HF')
+call l6opi(fzzsPid,'H000','I0HF')
+call l6opi(fzzsPid,'H003','I0HF')
+call l6opi(fzzsPid,'H04Q','I0HF')
+call l6opi(fzzsPid,'H076','I0HF')
+call l6opi(fzzsPid,'H04S','I0HF')
+call l6opi(fzzsPid,'H00K','I0HF')
+call l6opi(fzzsPid,'H05B','I0HF')
+call l6opi(fzzsPid,'H01H','I0HF')
+call l6opi(fzzsPid,'H04R','I0HF')
+call l6opi(fzzsPid,'H00E','I0HF')
+call l6opi(fzzsPid,'H001','I0HF')
+call l6opi(fzzsPid,'H05T','I0HF')
+call l6opi(fzzsPid,'H00Z','I0HF')
+call l6opi(fzzsPid,'H015','I0HF')
+call l6opi(fzzsPid,'H004','I0HF')
+call l6opi(fzzsPid,'H00J','I0HF')
+call l6opi(fzzsPid,'H066','I0HF')
+call l6opi(fzzsPid,'H005','I0HF')
+call l6opi(fzzsPid,'H002','I0HF')
+call l6opi(fzzsPid,'H021','I0HF')
+call l6opi(fzzsPid,'H01N','I0HF')
+call l6opi(fzzsPid,'H006','I0HF')
+call l6opi(fzzsPid,'H009','I0HF')
+call l6opi(fzzsPid,'H007','I0HF')
+call l6opi(fzzsPid,'H008','I0HF')
+call l6opi(fzzsPid,'H02M','I0HF')
+call l6opi(fzzsPid,'H01I','I0HF')
+call l6opi(fzzsPid,'H000','I0H4')
+call l6opi(fzzsPid,'H00H','I0H4')
+call l6opi(fzzsPid,'H01V','I0H4')
+call l6opi(fzzsPid,'H00E','I0H4')
+call l6opi(fzzsPid,'H00K','I0H4')
+call l6opi(fzzsPid,'H05B','I0H4')
+call l6opi(fzzsPid,'H04R','I0H4')
+call l6opi(fzzsPid,'H005','I0H4')
+call l6opi(fzzsPid,'H002','I0H4')
+call l6opi(fzzsPid,'H01N','I0H4')
+call l6opi(fzzsPid,'H00J','I0H4')
+call l6opi(fzzsPid,'H007','I0H4')
+call l6opi(fzzsPid,'H008','I0H4')
+call l6opi(fzzsPid,'H066','I0H4')
+call l6opi(fzzsPid,'H000','I0H5')
+call l6opi(fzzsPid,'H003','I0H5')
+call l6opi(fzzsPid,'Hblm','I0H5')
+call l6opi(fzzsPid,'H00H','I0H5')
+call l6opi(fzzsPid,'H01V','I0H5')
+call l6opi(fzzsPid,'H04Q','I0H5')
+call l6opi(fzzsPid,'H001','I0H5')
+call l6opi(fzzsPid,'H004','I0H5')
+call l6opi(fzzsPid,'H00E','I0H5')
+call l6opi(fzzsPid,'H01H','I0H5')
+call l6opi(fzzsPid,'H065','I0H5')
+call l6opi(fzzsPid,'H009','I0H5')
+call l6opi(fzzsPid,'H002','I0H5')
+call l6opi(fzzsPid,'H05T','I0H5')
+call l6opi(fzzsPid,'Hmkg','I0H5')
+call l6opi(fzzsPid,'H04S','I0H5')
+call l6opi(fzzsPid,'H00Z','I0H5')
+call l6opi(fzzsPid,'H015','I0H5')
+call l6opi(fzzsPid,'H066','I0H5')
+call l6opi(fzzsPid,'H006','I0H5')
+call l6opi(fzzsPid,'H007','I0H5')
+call l6opi(fzzsPid,'H000','I0HE')
+call l6opi(fzzsPid,'H003','I0HE')
+call l6opi(fzzsPid,'Hblm','I0HE')
+call l6opi(fzzsPid,'H00H','I0HE')
+call l6opi(fzzsPid,'H01V','I0HE')
+call l6opi(fzzsPid,'H04Q','I0HE')
+call l6opi(fzzsPid,'H004','I0HE')
+call l6opi(fzzsPid,'H00E','I0HE')
+call l6opi(fzzsPid,'H01H','I0HE')
+call l6opi(fzzsPid,'H065','I0HE')
+call l6opi(fzzsPid,'H009','I0HE')
+call l6opi(fzzsPid,'H002','I0HE')
+call l6opi(fzzsPid,'H001','I0HE')
+call l6opi(fzzsPid,'H01I','I0OY')
+call l6opi(fzzsPid,'H021','I0OY')
+call l6opi(fzzsPid,'H00K','I0OY')
+call l6opi(fzzsPid,'H001','I0OY')
+endfunction
+// 发放 docs/藏品 七份文档列出的藏品；已拥有的条目由 OO6O 跳过。
+function GrantDocumentCollectibles takes integer oIIO returns nothing
+// 背包
+// stwp 令牌力量结晶
+call OO6O(P[oIIO],'stwp')
+// I0S4 彩虹猫咪力量结晶
+call OO6O(P[oIIO],'I0S4')
+// e05J 迷你箱子
+call OO6O(P[oIIO],'e05J')
+// I0LD 鸭子骑士力量结晶
+call OO6O(P[oIIO],'I0LD')
+// rdis 海洋姑娘1力量结晶
+call OO6O(P[oIIO],'rdis')
+// rsps 海洋姑娘2力量结晶
+call OO6O(P[oIIO],'rsps')
+// rreb 海洋姑娘3力量结晶
+call OO6O(P[oIIO],'rreb')
+// I0RY 勇敢的螃蟹力量结晶
+call OO6O(P[oIIO],'I0RY')
+// I00M 星星力量结晶
+call OO6O(P[oIIO],'I00M')
+// rma2 万圣节蜘蛛力量结晶
+call OO6O(P[oIIO],'rma2')
+// rhe3 万圣节傀儡力量结晶
+call OO6O(P[oIIO],'rhe3')
+// rman 万圣节小孩力量结晶
+call OO6O(P[oIIO],'rman')
+// texp 万圣节特别力量结晶
+call OO6O(P[oIIO],'texp')
+// gold 万圣节小鬼力量结晶
+call OO6O(P[oIIO],'gold')
+// tdex 迷你雪人力量结晶
+call OO6O(P[oIIO],'tdex')
+// rej2 圣诞力量结晶
+call OO6O(P[oIIO],'rej2')
+// lmbr 迷你圣诞老人MK2力量结晶
+call OO6O(P[oIIO],'lmbr')
+// tdx2 幻想力量结晶
+call OO6O(P[oIIO],'tdx2')
+// lure 企鹅首领力量结晶
+call OO6O(P[oIIO],'lure')
+// e0BX 狼
+call OO6O(P[oIIO],'e0BX')
+// e0BU 青蛙
+call OO6O(P[oIIO],'e0BU')
+// e00B 兔子
+call OO6O(P[oIIO],'e00B')
+// e0BV 洋仔
+call OO6O(P[oIIO],'e0BV')
+// e0BS 战鹰
+call OO6O(P[oIIO],'e0BS')
+// e0BZ 猫头鹰
+call OO6O(P[oIIO],'e0BZ')
+// e0C6 小鹿
+call OO6O(P[oIIO],'e0C6')
+// e0C7 野猪
+call OO6O(P[oIIO],'e0C7')
+// e0C8 小浣熊
+call OO6O(P[oIIO],'e0C8')
+// e0C9 水狗
+call OO6O(P[oIIO],'e0C9')
+// e0CA 螃蟹
+call OO6O(P[oIIO],'e0CA')
+// e0CB 世界大咖·超级巨熊
+call OO6O(P[oIIO],'e0CB')
+// e00O 宝箱
+call OO6O(P[oIIO],'e00O')
+// e00U 小马
+call OO6O(P[oIIO],'e00U')
+// e00N 矿工
+call OO6O(P[oIIO],'e00N')
+// e0BT 未设置名称（继承 ewsp）
+call OO6O(P[oIIO],'e0BT')
+// e0BW 火凤凰
+call OO6O(P[oIIO],'e0BW')
+// e0BY 复仇幽魂
+call OO6O(P[oIIO],'e0BY')
+// e0C0 幽灵
+call OO6O(P[oIIO],'e0C0')
+// e0C1 熔岩巨兽
+call OO6O(P[oIIO],'e0C1')
+// e0C2 装甲坦克
+call OO6O(P[oIIO],'e0C2')
+// e0C3 恶魔
+call OO6O(P[oIIO],'e0C3')
+// e0C4 火焱猫咪
+call OO6O(P[oIIO],'e0C4')
+// e0C5 风暴之灵
+call OO6O(P[oIIO],'e0C5')
+// e00W 小鸡
+call OO6O(P[oIIO],'e00W')
+// e00Y 娃娃
+call OO6O(P[oIIO],'e00Y')
+// e04O 泥沼小怪
+call OO6O(P[oIIO],'e04O')
+// e04P 熔岩犬
+call OO6O(P[oIIO],'e04P')
+// e029 爱心
+call OO6O(P[oIIO],'e029')
+// e02B 迷你亚马罗斯
+call OO6O(P[oIIO],'e02B')
+// e0FG 记忆石
+call OO6O(P[oIIO],'e0FG')
+// 翅膀
+// I0I5 自然之翼 藏品
+call OO6O(P[oIIO],'I0I5')
+// I0IA 蝙蝠之翼 藏品
+call OO6O(P[oIIO],'I0IA')
+// SW01 海洋之翼模型
+call OO6O(P[oIIO],'SW01')
+// I0OX 纯净翅膀 藏品
+call OO6O(P[oIIO],'I0OX')
+// I0HQ 龙翼 藏品
+call OO6O(P[oIIO],'I0HQ')
+// I0HV 伯爵的披风 藏品
+call OO6O(P[oIIO],'I0HV')
+// I0HR 腐败水晶之翼 藏品
+call OO6O(P[oIIO],'I0HR')
+// SW02 嗜血·蝙蝠之翼模型
+call OO6O(P[oIIO],'SW02')
+// I0PQ 杀戮者长靴 藏品
+call OO6O(P[oIIO],'I0PQ')
+// I0HO 女神仙翼 藏品
+call OO6O(P[oIIO],'I0HO')
+// I0HS 冰极天雪魂翼 藏品
+call OO6O(P[oIIO],'I0HS')
+// I0HT 堕落的火焰魂翼 藏品
+call OO6O(P[oIIO],'I0HT')
+// I0HW 怒焱魂翼 藏品
+call OO6O(P[oIIO],'I0HW')
+// I0HX 信仰斗篷 藏品
+call OO6O(P[oIIO],'I0HX')
+// I0HY 耀目星芒魂翼 藏品
+call OO6O(P[oIIO],'I0HY')
+// I0I6 飞星流彩碎翼 藏品
+call OO6O(P[oIIO],'I0I6')
+// I0HP 霜魂女神之翼 藏品
+call OO6O(P[oIIO],'I0HP')
+// I0HU 星辰闪耀·圣堂之翼 藏品
+call OO6O(P[oIIO],'I0HU')
+// I0HZ 恶魔骨翼 藏品
+call OO6O(P[oIIO],'I0HZ')
+// I0I0 暗黑不朽魂翼 藏品
+call OO6O(P[oIIO],'I0I0')
+// I0I1 亡者灵魂 藏品
+call OO6O(P[oIIO],'I0I1')
+// I0I2 狂暴·堕落统治魂翼 藏品
+call OO6O(P[oIIO],'I0I2')
+// I0I3 幻想霜寒魂翼 藏品
+call OO6O(P[oIIO],'I0I3')
+// I0I9 地狱熔岩火凰羽翼 藏品
+call OO6O(P[oIIO],'I0I9')
+// I0I7 魔音护魂之翼 藏品
+call OO6O(P[oIIO],'I0I7')
+// I0I4 无坚不摧战翅 藏品
+call OO6O(P[oIIO],'I0I4')
+// I0JG 祈明·神谕血翼 藏品
+call OO6O(P[oIIO],'I0JG')
+// I0KS 净空·至上祝福羽翼 藏品
+call OO6O(P[oIIO],'I0KS')
+// I0KR 遂宇玄芒·灵仙魂翼 藏品
+call OO6O(P[oIIO],'I0KR')
+// I0O6 破邪·苍穹统治者 藏品
+call OO6O(P[oIIO],'I0O6')
+// I0O7 破穹·勇敢之心 藏品
+call OO6O(P[oIIO],'I0O7')
+// I0O8 焚神·浴火魂翼 藏品
+call OO6O(P[oIIO],'I0O8')
+// I0O9 荆棘·霜寒羽翼 藏品
+call OO6O(P[oIIO],'I0O9')
+// I0OA 哀歌·守夜者翅膀 藏品
+call OO6O(P[oIIO],'I0OA')
+// I0OP 悲魔·摄灵者 藏品
+call OO6O(P[oIIO],'I0OP')
+// I0OQ 永生·不朽之翼 藏品
+call OO6O(P[oIIO],'I0OQ')
+// I0OR 孤寂·深渊披风 藏品
+call OO6O(P[oIIO],'I0OR')
+// SW03 无尽·欲望斗篷模型
+call OO6O(P[oIIO],'SW03')
+// SW04 血风暴模型
+call OO6O(P[oIIO],'SW04')
+// SW05 守门人模型
+call OO6O(P[oIIO],'SW05')
+// SW06 神圣起源羽翼模型
+call OO6O(P[oIIO],'SW06')
+// SW07 寰宇之翼模型
+call OO6O(P[oIIO],'SW07')
+// SW08 行尽·生命烈焰模型
+call OO6O(P[oIIO],'SW08')
+// SW09 自由·魂灵之翼模型
+call OO6O(P[oIIO],'SW09')
+// SW10 灵魂隔断羽翼模型
+call OO6O(P[oIIO],'SW10')
+// SW11 死亡向往模型
+call OO6O(P[oIIO],'SW11')
+// SW12 虚空翅膀模型
+call OO6O(P[oIIO],'SW12')
+// SW13 吞噬者模型
+call OO6O(P[oIIO],'SW13')
+// SW14 回心·生命波纹模型
+call OO6O(P[oIIO],'SW14')
+// I0GQ 海蚀翅膀
+call OO6O(P[oIIO],'I0GQ')
+// I0RW 蔚蓝翅膀
+call OO6O(P[oIIO],'I0RW')
+// SW15 天空之翼膀
+call OO6O(P[oIIO],'SW15')
+// I0EQ 万圣节耀目翅膀
+call OO6O(P[oIIO],'I0EQ')
+// I0H7 小魔王翅膀
+call OO6O(P[oIIO],'I0H7')
+// I0HG 蓝天使翅膀
+call OO6O(P[oIIO],'I0HG')
+// I0HH 雪花翅膀
+call OO6O(P[oIIO],'I0HH')
+// I0MV 透明翅膀
+call OO6O(P[oIIO],'I0MV')
+// I0QD 胜利者翅膀
+call OO6O(P[oIIO],'I0QD')
+// I0QF 暮光翅膀
+call OO6O(P[oIIO],'I0QF')
+// I0QG 欢乐翅膀
+call OO6O(P[oIIO],'I0QG')
+// I0KU 小魔仙
+call OO6O(P[oIIO],'I0KU')
+// 光环
+// I0MW 怪异光环
+call OO6O(P[oIIO],'I0MW')
+// I0GE 神秘气息
+call OO6O(P[oIIO],'I0GE')
+// I0LA 蓝莲花光环
+call OO6O(P[oIIO],'I0LA')
+// I0RO 蓝色符文光环
+call OO6O(P[oIIO],'I0RO')
+// I0RP 蔚蓝幻影光环
+call OO6O(P[oIIO],'I0RP')
+// I00O 庆典光环
+call OO6O(P[oIIO],'I00O')
+// I0PD 闪耀灵魂光环
+call OO6O(P[oIIO],'I0PD')
+// I0PE 邪恶灵魂光环
+call OO6O(P[oIIO],'I0PE')
+// I0PF 神秘灵魂光环
+call OO6O(P[oIIO],'I0PF')
+// I04D 红色闪耀光环
+call OO6O(P[oIIO],'I04D')
+// I0PM 红莲花
+call OO6O(P[oIIO],'I0PM')
+// I0PK 暖曦灵魂
+call OO6O(P[oIIO],'I0PK')
+// I0PJ 酷寒灵魂
+call OO6O(P[oIIO],'I0PJ')
+// I0RJ 冰川光环
+call OO6O(P[oIIO],'I0RJ')
+// SU01 红月之域
+call OO6O(P[oIIO],'SU01')
+// SU02 蓝月之域
+call OO6O(P[oIIO],'SU02')
+// I0PV 紫色幸运光环
+call OO6O(P[oIIO],'I0PV')
+// I0LH 黄色的幸运光环
+call OO6O(P[oIIO],'I0LH')
+// I0PC 橙色的幸运光环
+call OO6O(P[oIIO],'I0PC')
+// I0M4 蓝色的幸运光环
+call OO6O(P[oIIO],'I0M4')
+// I0KV 山丘之堕
+call OO6O(P[oIIO],'I0KV')
+// 其它
+// I0H6 输出记录器
+call OO6O(P[oIIO],'I0H6')
+// I0RV 魔法石碑
+call OO6O(P[oIIO],'I0RV')
+// I0HJ 夜视镜
+call OO6O(P[oIIO],'I0HJ')
+// I0R0 银狼魔术棒
+call OO6O(P[oIIO],'I0R0')
+// I0QV 自然守护者魔术棒
+call OO6O(P[oIIO],'I0QV')
+// I0QW 魔龙魔术棒
+call OO6O(P[oIIO],'I0QW')
+// I0LL 恶魔领主魔术棒
+call OO6O(P[oIIO],'I0LL')
+// I0QX 火焰梦魇魔术棒
+call OO6O(P[oIIO],'I0QX')
+// I0QY 主天使魔术棒
+call OO6O(P[oIIO],'I0QY')
+// I0R1 冰龙魔术棒
+call OO6O(P[oIIO],'I0R1')
+// I0QS 怨魔魔术棒
+call OO6O(P[oIIO],'I0QS')
+// I0QU 死亡吞噬者魔术棒
+call OO6O(P[oIIO],'I0QU')
+// I0QT 女妖魔术棒
+call OO6O(P[oIIO],'I0QT')
+// I0QR 瓦尔托拉魔术棒
+call OO6O(P[oIIO],'I0QR')
+// I0QQ 火神魔术棒
+call OO6O(P[oIIO],'I0QQ')
+// I0QP 水神魔术棒
+call OO6O(P[oIIO],'I0QP')
+// I0QO 阿加雷斯魔术棒
+call OO6O(P[oIIO],'I0QO')
+// I0J3 旅行商人魔术棒
+call OO6O(P[oIIO],'I0J3')
+// I0J2 附魔师魔术棒
+call OO6O(P[oIIO],'I0J2')
+// I0J1 收割者魔术棒
+call OO6O(P[oIIO],'I0J1')
+// I0J4 赏金猎人魔术棒
+call OO6O(P[oIIO],'I0J4')
+// I0JC 风系魔导士魔术棒
+call OO6O(P[oIIO],'I0JC')
+// I0JD 追星剑圣魔术棒
+call OO6O(P[oIIO],'I0JD')
+// I0JE 神射手魔术棒
+call OO6O(P[oIIO],'I0JE')
+// I0JH 火法万圣节魔术棒
+call OO6O(P[oIIO],'I0JH')
+// I0JN 驯鹿鲁道夫
+call OO6O(P[oIIO],'I0JN')
+// I0JM 迷你小仙魔术棒
+call OO6O(P[oIIO],'I0JM')
+// I0JO 火凤凰魔术棒
+call OO6O(P[oIIO],'I0JO')
+// I0JP 附魔师万圣节魔术棒
+call OO6O(P[oIIO],'I0JP')
+// I0KW 逮捕魔术棒
+call OO6O(P[oIIO],'I0KW')
+// I03M 维奇(新年)魔术棒
+call OO6O(P[oIIO],'I03M')
+// I0EP 召唤亚莫亚
+call OO6O(P[oIIO],'I0EP')
+// I0QL 螃蟹魔术棒
+call OO6O(P[oIIO],'I0QL')
+// I001 蓝守护者魔术棒
+call OO6O(P[oIIO],'I001')
+// I00N 心心魔术棒
+call OO6O(P[oIIO],'I00N')
+// I0PB 幼小幽灵魔术棒
+call OO6O(P[oIIO],'I0PB')
+// I04C 幼小幽灵魔术棒 2
+call OO6O(P[oIIO],'I04C')
+// I0M5 小兔魔术棒
+call OO6O(P[oIIO],'I0M5')
+// I0HI 雪花法杖
+call OO6O(P[oIIO],'I0HI')
+// I0I8 谎言戒指
+call OO6O(P[oIIO],'I0I8')
+// I0MX 彩虹味糖果
+call OO6O(P[oIIO],'I0MX')
+// I0PU 烟花
+call OO6O(P[oIIO],'I0PU')
+// SM01 箱形变身药水
+call OO6O(P[oIIO],'SM01')
+// I0GX 神秘杆
+call OO6O(P[oIIO],'I0GX')
+// I0S0 周年庆留念
+call OO6O(P[oIIO],'I0S0')
+// I0EO 女巫的神秘糖果
+call OO6O(P[oIIO],'I0EO')
+// I0H8 女巫的糖块
+call OO6O(P[oIIO],'I0H8')
+// I0HB 魔女的神秘糖果
+call OO6O(P[oIIO],'I0HB')
+// I0FC 圣诞帽
+call OO6O(P[oIIO],'I0FC')
+// I0RK 圣诞树
+call OO6O(P[oIIO],'I0RK')
+// 装饰徽章
+// I0FS 海洋徽章
+call OO6O(P[oIIO],'I0FS')
+// I0H9 幽灵徽章
+call OO6O(P[oIIO],'I0H9')
+// I0HA 银喵徽章
+call OO6O(P[oIIO],'I0HA')
+// I0RC 恐怖之夜徽章
+call OO6O(P[oIIO],'I0RC')
+// I0RZ 周年庆之梦徽章
+call OO6O(P[oIIO],'I0RZ')
+// I03E 雪人徽章
+call OO6O(P[oIIO],'I03E')
+// 坐骑
+// I0P7 世界大咖·巨龙坐骑
+call OO6O(P[oIIO],'I0P7')
+// I0PT 世界大咖·法老坐骑
+call OO6O(P[oIIO],'I0PT')
+// I0PS 世界大咖·冰龙坐骑
+call OO6O(P[oIIO],'I0PS')
+// I0MU 彩虹猫咪
+call OO6O(P[oIIO],'I0MU')
+// I0L3 UFO
+call OO6O(P[oIIO],'I0L3')
+// I03Q 魔导机械
+call OO6O(P[oIIO],'I03Q')
+// I0LB 海象
+call OO6O(P[oIIO],'I0LB')
+// I0QK 大龙虾
+call OO6O(P[oIIO],'I0QK')
+// I000 直升机
+call OO6O(P[oIIO],'I000')
+// I03T 鲨鱼
+call OO6O(P[oIIO],'I03T')
+// I03U 蔚蓝彗星
+call OO6O(P[oIIO],'I03U')
+// I0PI 万圣节蜘蛛
+call OO6O(P[oIIO],'I0PI')
+// I0RB 地狱犬
+call OO6O(P[oIIO],'I0RB')
+// I0Q0 收割之神(坐骑)
+call OO6O(P[oIIO],'I0Q0')
+// I0RI 雪橇
+call OO6O(P[oIIO],'I0RI')
+// I03G 新年之宝
+call OO6O(P[oIIO],'I03G')
+// I0QC 巅峰坐骑·穹宇之主
+call OO6O(P[oIIO],'I0QC')
+// SC05 名称未找到（当前导出数据未见定义）
+call OO6O(P[oIIO],'SC05')
+// I04H 传奇坐骑·九霄至尊
+call OO6O(P[oIIO],'I04H')
+// 服装
+call fzzsGrantCostumesByHero(oIIO)
+endfunction
 function l6oqi takes integer oIIO returns nothing
 local string Io1o=StringCase(Ml[oIIO],false)
 set p1pl=false
 call TimerStart((uppo(0)),0,false,function l6o6i)
+call GrantDocumentCollectibles(oIIO)
 if((Io1o)==StringCase(("神人无功"),false))then
 call OO6O((P[((oIIO))]),('SB01'))
 call OO6O((P[((oIIO))]),('SB02'))
