@@ -9694,8 +9694,139 @@ boolexpr lpuo=null
 hashtable lppo=InitHashtable()
 endglobals
 native DzAPI_Map_GetPlayerUserName takes player whichPlayer returns string
-native DzAPI_Map_HasMallItem takes player whichPlayer,string key returns boolean
 native UnitAlive takes unit u returns boolean
+function DzAPI_Map_HasMallItem takes player whichPlayer,string key returns boolean
+if((((GetPlayerController(whichPlayer) == MAP_CONTROL_USER) and (GetPlayerSlotState(whichPlayer) == PLAYER_SLOT_STATE_PLAYING))))then
+if (key == "V5001") then
+    return true
+endif
+if (key == "V4001") then
+    return true
+endif
+if (key == "V4002") then
+    return true
+endif
+if (key == "V4003") then
+    return true
+endif
+if (key == "V3002") then
+    return true
+endif
+if (key == "V3005") then
+    return true
+endif
+if (key == "V3006") then
+    return true
+endif
+if (key == "V3017") then
+    return true
+endif
+if (key == "V3018") then
+    return true
+endif
+if (key == "V3019") then
+    return true
+endif
+if (key == "V2003") then
+    return true
+endif
+if (key == "V2006") then
+    return true
+endif
+if (key == "V2007") then
+    return true
+endif
+if (key == "V2008") then
+    return true
+endif
+if (key == "V2009") then
+    return true
+endif
+if (key == "V2010") then
+    return true
+endif
+if (key == "V1002") then
+    return true
+endif
+if (key == "V1003") then
+    return true
+endif
+if (key == "V1004") then
+    return true
+endif
+if (key == "V1005") then
+    return true
+endif
+if (key == "V1006") then
+    return true
+endif
+if (key == "V1007") then
+    return true
+endif
+if (key == "V1008") then
+    return true
+endif
+if (key == "V1009") then
+    return true
+endif
+if (key == "B1001") then
+    return true
+endif
+if (key == "B1002") then
+    return true
+endif
+if (key == "B1003") then
+    return true
+endif
+if (key == "B1004") then
+    return true
+endif
+if (key == "B1005") then
+    return true
+endif
+if (key == "B1006") then
+    return true
+endif
+if (key == "B1007") then
+    return true
+endif
+if (key == "A1001") then
+    return true
+endif
+if (key == "A1002") then
+    return true
+endif
+if (key == "A1003") then
+    return true
+endif
+if (key == "C1001") then
+    return true
+endif
+if (key == "C1002") then
+    return true
+endif
+if (key == "C1003") then
+    return true
+endif
+if (key == "C1004") then
+    return true
+endif
+if (key == "C1005") then
+    return true
+endif
+if (key == "C1006") then
+    return true
+endif
+if (key == "D1001") then
+    return true
+endif
+if (key == "D1002") then
+    return true
+endif
+return false
+endif
+return false
+endfunction
 function lq0o takes player lq_o returns string
 local string lquo=DzAPI_Map_GetPlayerUserName(lq_o)
 local integer lqpo=StringLength(lquo)
@@ -136016,7 +136147,7 @@ set ql[((Ii1o))]=0
 return
 endif
 if i_qO then
-call SetHeroLevel((yx[(ql[((Ii1o))])]),100,false)
+call SetHeroLevel((yx[(ql[((Ii1o))])]),100,false)   
 set jK[Pl[((Ii1o))]]=Qn
 endif
 set uip1[Ii1o]=i_qO
