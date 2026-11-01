@@ -185684,104 +185684,6 @@ call OO6O(P[oIIO],'e02B')
 // e0FG 记忆石
 call OO6O(P[oIIO],'e0FG')
 // 翅膀
-// I0I5 自然之翼 藏品
-call OO6O(P[oIIO],'I0I5')
-// I0IA 蝙蝠之翼 藏品
-call OO6O(P[oIIO],'I0IA')
-// SW01 海洋之翼模型
-call OO6O(P[oIIO],'SW01')
-// I0OX 纯净翅膀 藏品
-call OO6O(P[oIIO],'I0OX')
-// I0HQ 龙翼 藏品
-call OO6O(P[oIIO],'I0HQ')
-// I0HV 伯爵的披风 藏品
-call OO6O(P[oIIO],'I0HV')
-// I0HR 腐败水晶之翼 藏品
-call OO6O(P[oIIO],'I0HR')
-// SW02 嗜血·蝙蝠之翼模型
-call OO6O(P[oIIO],'SW02')
-// I0PQ 杀戮者长靴 藏品
-call OO6O(P[oIIO],'I0PQ')
-// I0HO 女神仙翼 藏品
-call OO6O(P[oIIO],'I0HO')
-// I0HS 冰极天雪魂翼 藏品
-call OO6O(P[oIIO],'I0HS')
-// I0HT 堕落的火焰魂翼 藏品
-call OO6O(P[oIIO],'I0HT')
-// I0HW 怒焱魂翼 藏品
-call OO6O(P[oIIO],'I0HW')
-// I0HX 信仰斗篷 藏品
-call OO6O(P[oIIO],'I0HX')
-// I0HY 耀目星芒魂翼 藏品
-call OO6O(P[oIIO],'I0HY')
-// I0I6 飞星流彩碎翼 藏品
-call OO6O(P[oIIO],'I0I6')
-// I0HP 霜魂女神之翼 藏品
-call OO6O(P[oIIO],'I0HP')
-// I0HU 星辰闪耀·圣堂之翼 藏品
-call OO6O(P[oIIO],'I0HU')
-// I0HZ 恶魔骨翼 藏品
-call OO6O(P[oIIO],'I0HZ')
-// I0I0 暗黑不朽魂翼 藏品
-call OO6O(P[oIIO],'I0I0')
-// I0I1 亡者灵魂 藏品
-call OO6O(P[oIIO],'I0I1')
-// I0I2 狂暴·堕落统治魂翼 藏品
-call OO6O(P[oIIO],'I0I2')
-// I0I3 幻想霜寒魂翼 藏品
-call OO6O(P[oIIO],'I0I3')
-// I0I9 地狱熔岩火凰羽翼 藏品
-call OO6O(P[oIIO],'I0I9')
-// I0I7 魔音护魂之翼 藏品
-call OO6O(P[oIIO],'I0I7')
-// I0I4 无坚不摧战翅 藏品
-call OO6O(P[oIIO],'I0I4')
-// I0JG 祈明·神谕血翼 藏品
-call OO6O(P[oIIO],'I0JG')
-// I0KS 净空·至上祝福羽翼 藏品
-call OO6O(P[oIIO],'I0KS')
-// I0KR 遂宇玄芒·灵仙魂翼 藏品
-call OO6O(P[oIIO],'I0KR')
-// I0O6 破邪·苍穹统治者 藏品
-call OO6O(P[oIIO],'I0O6')
-// I0O7 破穹·勇敢之心 藏品
-call OO6O(P[oIIO],'I0O7')
-// I0O8 焚神·浴火魂翼 藏品
-call OO6O(P[oIIO],'I0O8')
-// I0O9 荆棘·霜寒羽翼 藏品
-call OO6O(P[oIIO],'I0O9')
-// I0OA 哀歌·守夜者翅膀 藏品
-call OO6O(P[oIIO],'I0OA')
-// I0OP 悲魔·摄灵者 藏品
-call OO6O(P[oIIO],'I0OP')
-// I0OQ 永生·不朽之翼 藏品
-call OO6O(P[oIIO],'I0OQ')
-// I0OR 孤寂·深渊披风 藏品
-call OO6O(P[oIIO],'I0OR')
-// SW03 无尽·欲望斗篷模型
-call OO6O(P[oIIO],'SW03')
-// SW04 血风暴模型
-call OO6O(P[oIIO],'SW04')
-// SW05 守门人模型
-call OO6O(P[oIIO],'SW05')
-// SW06 神圣起源羽翼模型
-call OO6O(P[oIIO],'SW06')
-// SW07 寰宇之翼模型
-call OO6O(P[oIIO],'SW07')
-// SW08 行尽·生命烈焰模型
-call OO6O(P[oIIO],'SW08')
-// SW09 自由·魂灵之翼模型
-call OO6O(P[oIIO],'SW09')
-// SW10 灵魂隔断羽翼模型
-call OO6O(P[oIIO],'SW10')
-// SW11 死亡向往模型
-call OO6O(P[oIIO],'SW11')
-// SW12 虚空翅膀模型
-call OO6O(P[oIIO],'SW12')
-// SW13 吞噬者模型
-call OO6O(P[oIIO],'SW13')
-// SW14 回心·生命波纹模型
-call OO6O(P[oIIO],'SW14')
 // I0GQ 海蚀翅膀
 call OO6O(P[oIIO],'I0GQ')
 // I0RW 蔚蓝翅膀
@@ -185858,32 +185760,6 @@ call OO6O(P[oIIO],'I0RV')
 call OO6O(P[oIIO],'I0HJ')
 // I0R0 银狼魔术棒
 call OO6O(P[oIIO],'I0R0')
-// I0QV 自然守护者魔术棒
-call OO6O(P[oIIO],'I0QV')
-// I0QW 魔龙魔术棒
-call OO6O(P[oIIO],'I0QW')
-// I0LL 恶魔领主魔术棒
-call OO6O(P[oIIO],'I0LL')
-// I0QX 火焰梦魇魔术棒
-call OO6O(P[oIIO],'I0QX')
-// I0QY 主天使魔术棒
-call OO6O(P[oIIO],'I0QY')
-// I0R1 冰龙魔术棒
-call OO6O(P[oIIO],'I0R1')
-// I0QS 怨魔魔术棒
-call OO6O(P[oIIO],'I0QS')
-// I0QU 死亡吞噬者魔术棒
-call OO6O(P[oIIO],'I0QU')
-// I0QT 女妖魔术棒
-call OO6O(P[oIIO],'I0QT')
-// I0QR 瓦尔托拉魔术棒
-call OO6O(P[oIIO],'I0QR')
-// I0QQ 火神魔术棒
-call OO6O(P[oIIO],'I0QQ')
-// I0QP 水神魔术棒
-call OO6O(P[oIIO],'I0QP')
-// I0QO 阿加雷斯魔术棒
-call OO6O(P[oIIO],'I0QO')
 // I0J3 旅行商人魔术棒
 call OO6O(P[oIIO],'I0J3')
 // I0J2 附魔师魔术棒
