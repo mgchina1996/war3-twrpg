@@ -7,6 +7,12 @@ integer twrpgBossBarFill=0
 integer twrpgBossBarEdge=0
 integer twrpgBossBarName=0
 integer twrpgBossBarValue=0
+// 以下缓存只用于各客户端的血条显示，不参与同步战斗逻辑。
+unit twrpgBossBarShownTarget=null
+real twrpgBossBarShownLife=0.
+real twrpgBossBarShownMaximum=0.
+real twrpgBossBarLastSample=0.
+integer twrpgBossBarHealTicks=0
 constant real TWRPG_BOSS_BAR_WIDTH=.32
 integer array V
 integer array E
@@ -248524,9 +248530,11 @@ set pid=pid+1
 endloop
 set u=twrpgBossBarTargets[GetPlayerId(viewer)]
 if u==null then
+set twrpgBossBarShownTarget=null
 call DzFrameShow(twrpgBossBarRoot,false)
 else
 if GetUnitTypeId(u)==0 or not UnitAlive(u) or not IsUnitVisible(u,viewer) then
+set twrpgBossBarShownTarget=null
 call DzFrameShow(twrpgBossBarRoot,false)
 else
 set index=GetUnitUserData(u)
@@ -248538,6 +248546,17 @@ else
 set life=GetUnitState(u,UNIT_STATE_LIFE)
 set maximum=GetUnitState(u,UNIT_STATE_MAX_LIFE)
 endif
+// 掉血立即更新；回血最多每 10 次采样（0.5 秒）更新一次。
+// 与上一次真实采样比较，确保回血途中受伤也能及时显示。
+set twrpgBossBarHealTicks=twrpgBossBarHealTicks+1
+if twrpgBossBarShownTarget!=u or maximum!=twrpgBossBarShownMaximum or life<twrpgBossBarLastSample or twrpgBossBarHealTicks>=10 then
+set twrpgBossBarShownTarget=u
+set twrpgBossBarShownLife=life
+set twrpgBossBarShownMaximum=maximum
+set twrpgBossBarHealTicks=0
+endif
+set twrpgBossBarLastSample=life
+set life=twrpgBossBarShownLife
 if maximum>0. then
 set ratio=life/maximum
 endif
