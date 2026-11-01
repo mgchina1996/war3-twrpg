@@ -1,0 +1,25 @@
+﻿{
+    "version":  1,
+    "files":  [
+                  {
+                      "source":  "files/UI/TwrpgBossBar/Border.tga",
+                      "target":  "UI\\TwrpgBossBar\\Border.tga",
+                      "mode":  "replace"
+                  },
+                  {
+                      "source":  "files/UI/TwrpgBossBar/Track.tga",
+                      "target":  "UI\\TwrpgBossBar\\Track.tga",
+                      "mode":  "replace"
+                  },
+                  {
+                      "source":  "files/UI/TwrpgBossBar/Fill.tga",
+                      "target":  "UI\\TwrpgBossBar\\Fill.tga",
+                      "mode":  "replace"
+                  },
+                  {
+                      "source":  "files/UI/TwrpgBossBar/Edge.tga",
+                      "target":  "UI\\TwrpgBossBar\\Edge.tga",
+                      "mode":  "replace"
+                  }
+              ]
+}

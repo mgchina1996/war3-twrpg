@@ -1,4 +1,13 @@
 globals
+// Boss 顶部血条：仅保存 UI 状态，不修改战斗数据。
+hashtable twrpgBossBarData=InitHashtable()
+unit array twrpgBossBarTargets
+integer twrpgBossBarRoot=0
+integer twrpgBossBarFill=0
+integer twrpgBossBarEdge=0
+integer twrpgBossBarName=0
+integer twrpgBossBarValue=0
+constant real TWRPG_BOSS_BAR_WIDTH=.32
 integer array V
 integer array E
 integer array O
@@ -9693,6 +9702,17 @@ real lp_o=.0
 boolexpr lpuo=null
 hashtable lppo=InitHashtable()
 endglobals
+// 官方对战平台 DzFrame 接口。
+native DzGetGameUI takes nothing returns integer
+native DzCreateFrameByTagName takes string frameType,string name,integer parent,string template,integer id returns integer
+native DzFrameSetAbsolutePoint takes integer frame,integer point,real x,real y returns nothing
+native DzFrameSetPoint takes integer frame,integer point,integer relativeFrame,integer relativePoint,real x,real y returns nothing
+native DzFrameSetSize takes integer frame,real w,real h returns nothing
+native DzFrameSetTexture takes integer frame,string texture,integer flag returns nothing
+native DzFrameSetText takes integer frame,string text returns nothing
+native DzFrameSetFont takes integer frame,string fileName,real height,integer flag returns nothing
+native DzFrameShow takes integer frame,boolean enable returns nothing
+native DzFrameSetEnable takes integer frame,boolean enable returns nothing
 native DzAPI_Map_GetPlayerUserName takes player whichPlayer returns string
 native UnitAlive takes unit u returns boolean
 function DzAPI_Map_HasMallItem takes player whichPlayer,string key returns boolean
@@ -48950,6 +48970,14 @@ return
 endif
 if GetUnitTypeId((yx[(Ii1o)]))!=0 then
 call ReviveHero((yx[(Ii1o)]),Z4[Ii1o],v5[Ii1o],true)
+// 0=墓碑回点复活，1=灵魂回点复活，2=技能指定位置复活。
+// 仅默认回点复活成功后结束 Boss 追踪；技能复活保留目标。
+if y4[Ii1o]!=2 and ql[Nz[Ii1o]]==Ii1o and UnitAlive(yx[Ii1o]) then
+set twrpgBossBarTargets[Nz[Ii1o]]=null
+if GetLocalPlayer()==Player(Nz[Ii1o]) and twrpgBossBarRoot!=0 then
+call DzFrameShow(twrpgBossBarRoot,false)
+endif
+endif
 call uqlO((Ii1o),uqiO((Ii1o)))
 call uqOO((Ii1o),uq0O((Ii1o)))
 call ppoo(pu1o("Abilities\\Spells\\Human\\ReviveHuman\\ReviveHuman.wav",$A,$A,3.196),'d',(yx[(Ii1o)]))
@@ -248417,6 +248445,200 @@ call SetPlayerAllianceStateVisionBJ(Player($A),Player(8),true)
 call SetPlayerAllianceStateVisionBJ(Player($A),Player(9),true)
 call SetPlayerTeam(Player($B),1)
 endfunction
+// Boss 顶部血条。坐标采用 DzFrame 的 0.8 x 0.6 屏幕坐标。
+function TwrpgBossBarRegister takes integer unitId returns nothing
+call SaveBoolean(twrpgBossBarData,unitId,0,true)
+endfunction
+function TwrpgBossBarIsBoss takes unit u returns boolean
+if u==null then
+return false
+endif
+return HaveSavedBoolean(twrpgBossBarData,GetUnitTypeId(u),0)
+endfunction
+// 墓碑/灵魂等待复活期间，原生存活状态不足以判断英雄可参战。
+function TwrpgBossBarHeroReady takes integer pid returns boolean
+local integer hero=ql[pid]
+if hero==0 or yx[hero]==null then
+return false
+endif
+if not UnitAlive(yx[hero]) or uq1O(hero)<=0. then
+return false
+endif
+if e5[hero]!=0 and lw[e5[hero]] then
+return false
+endif
+return true
+endfunction
+function TwrpgBossBarSetTarget takes player p,unit u returns nothing
+local integer pid=GetPlayerId(p)
+if not TwrpgBossBarHeroReady(pid) then
+return
+endif
+if TwrpgBossBarIsBoss(u) and IsUnitEnemy(u,p) and UnitAlive(u) then
+set twrpgBossBarTargets[GetPlayerId(p)]=u
+endif
+endfunction
+function TwrpgBossBarOnOrder takes nothing returns nothing
+call TwrpgBossBarSetTarget(GetOwningPlayer(GetTriggerUnit()),GetOrderTargetUnit())
+endfunction
+function TwrpgBossBarOnAttack takes nothing returns nothing
+// 玩家攻击 Boss，或 Boss 攻击玩家时显示。
+call TwrpgBossBarSetTarget(GetOwningPlayer(GetAttacker()),GetTriggerUnit())
+call TwrpgBossBarSetTarget(GetOwningPlayer(GetTriggerUnit()),GetAttacker())
+endfunction
+// 去除单位名称自带颜色，确保 Boss 名称统一显示为指定颜色。
+function TwrpgBossBarPlainName takes string name returns string
+local integer i=0
+local integer length=StringLength(name)
+local string result=""
+local string token=""
+loop
+exitwhen i>=length
+set token=SubString(name,i,i+2)
+if token=="|c" or token=="|C" then
+set i=i+10
+elseif token=="|r" or token=="|R" then
+set i=i+2
+else
+set result=result+SubString(name,i,i+1)
+set i=i+1
+endif
+endloop
+return result
+endfunction
+function TwrpgBossBarUpdate takes nothing returns nothing
+local player viewer=GetLocalPlayer()
+local unit u=null
+local integer pid=0
+local integer index=0
+local real life=0.
+local real maximum=0.
+local real ratio=0.
+// 死亡、墓碑及灵魂阶段保留目标；仅英雄移除时同步清理。
+loop
+exitwhen pid>=12
+if ql[pid]==0 or yx[ql[pid]]==null or GetUnitTypeId(yx[ql[pid]])==0 then
+set twrpgBossBarTargets[pid]=null
+endif
+set pid=pid+1
+endloop
+set u=twrpgBossBarTargets[GetPlayerId(viewer)]
+if u==null then
+call DzFrameShow(twrpgBossBarRoot,false)
+else
+if GetUnitTypeId(u)==0 or not UnitAlive(u) or not IsUnitVisible(u,viewer) then
+call DzFrameShow(twrpgBossBarRoot,false)
+else
+set index=GetUnitUserData(u)
+// HC / jC 是地图的虚拟生命值；优先使用地图访问器。
+if index>0 and yx[index]==u then
+set life=uq1O(index)
+set maximum=I2R(uqiO(index))
+else
+set life=GetUnitState(u,UNIT_STATE_LIFE)
+set maximum=GetUnitState(u,UNIT_STATE_MAX_LIFE)
+endif
+if maximum>0. then
+set ratio=life/maximum
+endif
+if ratio<0. then
+set ratio=0.
+elseif ratio>1. then
+set ratio=1.
+endif
+if life<0. then
+set life=0.
+endif
+call DzFrameSetText(twrpgBossBarName,"|cffff3030"+TwrpgBossBarPlainName(GetUnitName(u))+"|r")
+call DzFrameSetText(twrpgBossBarValue,"|cff9bff9b"+I2S(R2I(life))+"  -  "+R2SW(ratio*100.,1,1)+"%|r")
+// 保持左端锚定；空血时隐藏填充，避免创建零宽 Frame。
+call DzFrameShow(twrpgBossBarFill,ratio>0.)
+call DzFrameShow(twrpgBossBarEdge,ratio>0. and ratio<1.)
+if ratio>0. then
+call DzFrameSetSize(twrpgBossBarFill,TWRPG_BOSS_BAR_WIDTH*ratio,.014)
+call DzFrameSetPoint(twrpgBossBarEdge,0,twrpgBossBarFill,2,-.001,.004)
+endif
+call DzFrameShow(twrpgBossBarRoot,true)
+endif
+endif
+set u=null
+set viewer=null
+endfunction
+function TwrpgBossBarBackdrop takes string name,integer parent,integer relative,integer point,real x,real y,real width,real height,string texture returns integer
+local integer frame=DzCreateFrameByTagName("BACKDROP",name,parent,"",0)
+call DzFrameSetTexture(frame,texture,0)
+call DzFrameSetSize(frame,width,height)
+call DzFrameSetPoint(frame,0,relative,point,x,y)
+return frame
+endfunction
+function TwrpgBossBarInit takes nothing returns nothing
+local integer background=0
+local integer border=0
+local integer i=0
+local trigger ordered=CreateTrigger()
+local trigger attacked=CreateTrigger()
+call DestroyTimer(GetExpiredTimer())
+// 无头像、无整块底板：名称和血槽紧凑排列。
+set twrpgBossBarRoot=DzCreateFrameByTagName("FRAME","TwrpgBossBarRoot",DzGetGameUI(),"",0)
+call DzFrameSetAbsolutePoint(twrpgBossBarRoot,0,.238,.55)
+call DzFrameSetSize(twrpgBossBarRoot,.324,.032)
+set border=TwrpgBossBarBackdrop("TwrpgBossBarTrackBorder",twrpgBossBarRoot,twrpgBossBarRoot,0,0.,-.012,.324,.018,"UI\\TwrpgBossBar\\Border.tga")
+set background=TwrpgBossBarBackdrop("TwrpgBossBarTrack",twrpgBossBarRoot,border,0,.002,-.002,TWRPG_BOSS_BAR_WIDTH,.014,"UI\\TwrpgBossBar\\Track.tga")
+set twrpgBossBarFill=TwrpgBossBarBackdrop("TwrpgBossBarFill",twrpgBossBarRoot,background,0,0.,0.,TWRPG_BOSS_BAR_WIDTH,.014,"UI\\TwrpgBossBar\\Fill.tga")
+set twrpgBossBarEdge=TwrpgBossBarBackdrop("TwrpgBossBarEdge",twrpgBossBarRoot,twrpgBossBarFill,2,-.001,.004,.002,.022,"UI\\TwrpgBossBar\\Edge.tga")
+set twrpgBossBarName=DzCreateFrameByTagName("TEXT","TwrpgBossBarName",twrpgBossBarRoot,"",0)
+call DzFrameSetPoint(twrpgBossBarName,7,background,1,0.,.004)
+call DzFrameSetFont(twrpgBossBarName,"Fonts\\dfst-m9.ttf",.009,0)
+call DzFrameSetText(twrpgBossBarName,"")
+set twrpgBossBarValue=DzCreateFrameByTagName("TEXT","TwrpgBossBarValue",twrpgBossBarRoot,"",0)
+call DzFrameSetPoint(twrpgBossBarValue,4,background,4,0.,0.)
+call DzFrameSetFont(twrpgBossBarValue,"Fonts\\dfst-m9.ttf",.009,0)
+call DzFrameSetText(twrpgBossBarValue,"")
+call DzFrameShow(twrpgBossBarRoot,false)
+// n03S 远古 骨龙
+call TwrpgBossBarRegister('n03S')
+// n02V 亡灵 战神 维扎克斯
+call TwrpgBossBarRegister('n02V')
+// n033 僵尸领主
+call TwrpgBossBarRegister('n033')
+// n030 秘境守护者法老他爷
+call TwrpgBossBarRegister('n030')
+// o000 主天使 哈乜嘢
+call TwrpgBossBarRegister('o000')
+// n02Y 被诅咒的冰霜巨龙 辛德拉苟萨
+call TwrpgBossBarRegister('n02Y')
+// h01K 被遗忘的黑暗怨魔
+call TwrpgBossBarRegister('h01K')
+// h04O 雷电战神 瓦尔托拉
+call TwrpgBossBarRegister('h04O')
+// h060 火灵战神·伊弗利特
+call TwrpgBossBarRegister('h060')
+// h06T 水灵战神
+call TwrpgBossBarRegister('h06T')
+// h077 地底君主 阿迦瑞斯
+call TwrpgBossBarRegister('h077')
+// h08K 公爵 拉撒路
+call TwrpgBossBarRegister('h08K')
+// h09B 土灵战神盖亚
+call TwrpgBossBarRegister('h09B')
+// h09V 古代魔导机器
+call TwrpgBossBarRegister('h09V')
+// h0A1 灵魂收割者·斯蒂里克斯
+call TwrpgBossBarRegister('h0A1')
+// h0AB 光之引导者 凯梅尔
+call TwrpgBossBarRegister('h0AB')
+loop
+exitwhen i>=12
+call TriggerRegisterPlayerUnitEvent(ordered,Player(i),EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER,null)
+set i=i+1
+endloop
+call TriggerRegisterAnyUnitEventBJ(attacked,EVENT_PLAYER_UNIT_ATTACKED)
+call TriggerAddAction(ordered,function TwrpgBossBarOnOrder)
+call TriggerAddAction(attacked,function TwrpgBossBarOnAttack)
+call TimerStart(CreateTimer(),.05,true,function TwrpgBossBarUpdate)
+set ordered=null
+set attacked=null
+endfunction
 function main takes nothing returns nothing
 local weathereffect we
 local trigger t
@@ -248441,6 +248663,7 @@ local integer o6Io
 local integer o61Ii
 local version v
 local integer l91o
+call TimerStart(CreateTimer(),0.,false,function TwrpgBossBarInit)
 call SetCameraBounds(-29952.+GetCameraMargin(CAMERA_MARGIN_LEFT),-31488.+GetCameraMargin(CAMERA_MARGIN_BOTTOM),31232.-GetCameraMargin(CAMERA_MARGIN_RIGHT),17408.-GetCameraMargin(CAMERA_MARGIN_TOP),-29952.+GetCameraMargin(CAMERA_MARGIN_LEFT),17408.-GetCameraMargin(CAMERA_MARGIN_TOP),31232.-GetCameraMargin(CAMERA_MARGIN_RIGHT),-31488.+GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 call SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl","Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 call SetTerrainFogEx(0,80000.,90000.,.0,.0,.0,.0)
